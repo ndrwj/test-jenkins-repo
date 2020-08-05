@@ -19,7 +19,15 @@ node {
   def app
   def Dockerfile
   def repotag
- 
+
+  stage('Checkout') {
+      // Clone the git repository
+      checkout scm
+      def path = sh returnStdout: true, script: "pwd"
+      path = path.trim()
+      dockerfile = path + "/Dockerfile"
+  }
+
   stage('Build') {
     // Build the image and push it to a staging repository
     repotag = inputConfig['dockerRepository'] + ":${BUILD_NUMBER}"
@@ -29,3 +37,7 @@ node {
     }
   }
 }
+
+
+
+
