@@ -54,7 +54,7 @@ node {
             anchore engineRetries: '500', name: anchorefile, engineurl: inputConfig['anchoreEngineUrl'], engineCredentialsId: inputConfig['anchoreEngineCredentials'], annotations: [[key: 'added-by', value: 'jenkins']]         
         }
       }
-  }
+ 
 
   stage('Deploy to k8s') {
       sshagent(['k8s-master']) {
