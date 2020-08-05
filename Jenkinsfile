@@ -27,7 +27,6 @@ node {
       def path = sh returnStdout: true, script: "pwd"
       path = path.trim()
       dockerfile = path + "/Dockerfile"
-      anchorefile = path + "/anchore_images"
     }
 
   stage('Build') {
@@ -40,5 +39,12 @@ node {
       app = docker.build(latesttag)
       app.push()
     }
+  }
+  stage('Deploy to k8s') {
+      sshagent(['k8s-master']) {
+          sh "scp -o StrictHostKeyChecking=no service.yaml pod.yaml root@10.110.110.104:~"
+          sh "ssh root@10.110.110.104 kubectl apply -f ."
+    }
+
   }
 }
