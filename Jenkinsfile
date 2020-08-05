@@ -42,10 +42,10 @@ node {
   }
   stage('Deploy to k8s') {
       sshagent(['k8s-master']) {
-         sh "ssh -o StrictHostKeyChecking=no root@10.110.110.104 whoami"
-	 sh "ssh root@10.110.110.104 pwd"
-	 // sh "scp -o StrictHostKeyChecking=no service.yaml pod.yaml root@10.110.110.104:~"
-         // sh "ssh root@10.110.110.104 kubectl apply -f ."
+         //sh "ssh -o StrictHostKeyChecking=no root@10.110.110.104 whoami"
+	 //sh "ssh root@10.110.110.104 pwd"
+	  sh "scp -o StrictHostKeyChecking=no service.yaml pod.yaml root@10.110.110.104:~"
+          sh "ssh root@10.110.110.104 kubectl apply -f ."
     }
 
   }
