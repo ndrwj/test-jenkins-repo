@@ -20,7 +20,7 @@ node {
   def Dockerfile
   def repotag
   def latesttag
-  
+
   try {
   stage('Checkout') {
       // Clone the git repository
@@ -41,15 +41,7 @@ node {
       app.push()
     }
   }
-  stage('Deploy to k8s') {
-      sshagent(['k8s-master']) {
-          sh script: "scp -o StrictHostKeyChecking=no service.yaml pod.yaml root@10.110.110.104:~"
-          sh script: "ssh root@10.110.110.104 kubectl apply -f ."
-          sh script: "ssh root@10.110.110.104 rm *.yaml"
-    }
-
-   }
- } finally {
+}  finally {
     stage('Cleanup') {
       // Delete the docker image and clean up any allotted resources
       sh script: "docker rmi " + repotag
@@ -57,4 +49,3 @@ node {
       }
     }
 }
-
