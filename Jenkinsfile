@@ -1,6 +1,6 @@
 stage('Configure') {
     abort = false
-    inputConfig = input id: 'InputConfig', message: 'Credentials for pipeline', parameters: [string(defaultValue: 'https://index.docker.io/v1/', description: 'Docker registry URL', name: 'dockerRegistryUrl', trim: true), string(defaultValue: '', description: 'Name of the docker repository', name: 'dockerRepository', trim: true), credentials(credentialType: 'com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl', defaultValue: '', description: 'Credentials for connecting to the docker registry', name: 'dockerCredentials', required: true)]
+    inputConfig = input id: 'InputConfig', message: 'Credentials for pipeline', parameters: [string(defaultValue: '', description: 'Name of the docker repository', name: 'dockerRepository', trim: true)]
 
     for (config in inputConfig) {
         if (null == config.value || config.value.length() <= 0) {
