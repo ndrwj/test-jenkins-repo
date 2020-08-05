@@ -20,6 +20,7 @@ node {
   def Dockerfile
   def repotag
   def latesttag
+  def anchorefile
   
   try {
   stage('Checkout') {
@@ -28,7 +29,8 @@ node {
       def path = sh returnStdout: true, script: "pwd"
       path = path.trim()
       dockerfile = path + "/Dockerfile"
-    }
+      anchorefile= path + "/anchore_images" 
+   }
 
   stage('Build') {
     // Build the image and push it to a staging repository
