@@ -20,13 +20,13 @@ node {
   def Dockerfile
   def repotag
 
-//  stage('Checkout') {
+  stage('Checkout') {
       // Clone the git repository
-//      checkout scm
-//      def path = sh returnStdout: true, script: "pwd"
-//      path = path.trim()
-//      dockerfile = path + "/Dockerfile"
-//    }
+      checkout scm
+      def path = sh returnStdout: true, script: "pwd"
+      path = path.trim()
+      dockerfile = path + "/Dockerfile"
+    }
 
   stage('Build') {
     // Build the image and push it to a staging repository
