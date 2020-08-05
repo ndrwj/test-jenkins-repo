@@ -50,9 +50,9 @@ node {
               sh 'echo "test - passed"'
           }
         },
-        Analyze: {
-            writeFile file: anchorefile, text: inputConfig['dockerRegistryHostname'] + "/" + repotag + "" + dockerfile
-            anchore engineRetries: '500', name: anchorefile, engineurl: inputConfig['anchoreEngineUrl'], engineCredentialsId: inputConfig['anchoreEngineCredentials'], annotations: [[key: 'added-by', value: 'jenkins']]         
+      Analyze: {
+        writeFile file: anchorefile, text: inputConfig['dockerRegistryHostname'] + "/" + repotag + " " + dockerfile
+        anchore engineRetries: '500', name: anchorefile, engineurl: inputConfig['anchoreEngineUrl'], engineCredentialsId: inputConfig['anchoreEngineCredentials'], annotations: [[key: 'added-by', value: 'jenkins']]
         }
       }
 
@@ -72,3 +72,4 @@ node {
       }
     }
 }
+
