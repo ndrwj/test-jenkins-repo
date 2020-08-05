@@ -19,15 +19,13 @@ node {
   def app
   def Dockerfile
   def repotag
-
-  try { 
-    stage('Build') {
-      // Build the image and push it to a staging repository
-      repotag = inputConfig['dockerRepository'] + ":${BUILD_NUMBER}"
-      docker.withRegistry(inputConfig['dockerRegistryUrl'], inputConfig['dockerCredentials']) {
-        app = docker.build(repotag)
-        app.push()
-      }
+ 
+  stage('Build') {
+    // Build the image and push it to a staging repository
+    repotag = inputConfig['dockerRepository'] + ":${BUILD_NUMBER}"
+    docker.withRegistry(inputConfig['dockerRegistryUrl'], inputConfig['dockerCredentials']) {
+      app = docker.build(repotag)
+      app.push()
     }
   }
 }
